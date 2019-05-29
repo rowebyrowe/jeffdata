@@ -19,6 +19,9 @@ class NullHelper:
             print('No such value found')
 
     def replace_nulls(self, columns, before, after):
+        '''Choose what columns, 
+        what you want to change, 
+        and what to change it to'''
         for column in columns:
             self.column = self.column.replace(before, after)
         return self
