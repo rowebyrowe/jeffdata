@@ -4,24 +4,25 @@ class NullHelper:
 
     def __init__(self, df):
         self.df = df
+        self.columns = df.columns
+        self.values = df.values
 
     def check_for_values(self, value):
         '''let's you input common values that could be nans
         and will tell you how many a column has'''
         columns = self.columns
-        if value in self.index:
+        if value in self.values:
             for column in columns:
-                print(column, 'nulls:', self[self[column] == value].sum(),
+                print(column,':', self[column][self[column] == value].count(),
                       'percentage of whole:', 
-                      self[self[column] == value].sum()/self[column].count()*100, 
-                      '%', '\n')
+                      self[column][self[column] == value].count()/self[column].count()*100, 
+                      '%')
         else:
             print('No such value found')
 
-    def replace_nulls(self, columns, before, after):
+    def replace_nulls(self, column, before, after):
         '''Choose what columns, 
         what you want to change, 
         and what to change it to'''
-        for column in columns:
-            self.column = self.column.replace(before, after)
+        self[column] = self[column].replace(before, after)
         return self
